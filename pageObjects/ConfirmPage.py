@@ -17,8 +17,6 @@ class ConfirmPage(BaseClass):
         self.driver = driver
 
     #-----Acton methods--------------
-
-
     def Select_Country(self,Country_String):
         self.driver.find_element(By.ID, "country").send_keys(Country_String[:3])
         self.verifiy_link_presence(self.namesBlock)
