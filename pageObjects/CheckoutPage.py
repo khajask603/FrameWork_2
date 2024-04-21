@@ -22,7 +22,6 @@ class CheckoutPage(BaseClass):
 
 
     def click_AddButton(self):
-        self.verifiy_link_presence("(//div[@class='card-footer'])//button")
         self.driver.find_element(By.XPATH,self.CardFooter).click()
 
     def Click_Chekout_Button(self):
