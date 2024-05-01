@@ -18,8 +18,8 @@ driver=None                                                     #Declare Globall
 
 def pytest_addoption(parser):
     # parser.addoption("--browser", action="store")
-    parser.addoption("--headless", action="store")
-    parser.addoption("--browser", action="store",default="chrome")     #Ign   oring as i kept chrome as default browser
+    parser.addoption("--headless")
+    parser.addoption("--browser", action="store",default="chrome")     #Ii kept chrome as default browser
 
 @pytest.fixture(scope="class")
 def setup(request):
@@ -36,19 +36,18 @@ def setup(request):
 
     elif browser == "edge":
         options = webdriver.EdgeOptions()
-        if headless:  # Check if headless mode is specified
+        if headless:
             options.add_argument("--headless")
             options.add_experimental_option("detach", True)
         driver = webdriver.Edge(options=options, service=EdgeService(EdgeChromiumDriverManager().install()))
         print("------------Launching Edge Browser----------------")
     elif browser == "chrome":
         options = webdriver.ChromeOptions()
-        if headless:  # Check if headless mode is specified
+        if headless:
             options.add_argument("--headless")
         options.add_experimental_option("detach", True)
         driver = webdriver.Chrome(options=options, service=Service(ChromeDriverManager().install()))
         print("------------Launching Chrome Browser----------------")
-    driver.maximize_window()
     driver.implicitly_wait(5)
     driver.get("https://rahulshettyacademy.com/angularpractice/")
     request.cls.driver = driver  # Assign the driver to the class attribute
@@ -92,29 +91,3 @@ def _capture_screenshot(name):
 
 
 
-
-#---------------------Pavan Sir Notes ----------for Comparsion
-# # --------To invoke browser from comand line for browser
-# # 1)This will get the value from CLI
-# def pytest_addoption(parser):
-#     parser.addoption("--browser")
-# # 2)--------These Below fixture will take it from from top-----------
-# @pytest.fixture()
-# def browser(request):  # This will return the Browser value to setup method
-#     return request.config.getoption("--browser")
-
-#-------------Single Browser--------
-
-
-# @pytest.fixture(scope="class")
-# def setup(request):
-#     global driver                                                #Declare Globally
-#     ops = webdriver.ChromeOptions()
-#     ops.add_experimental_option("detach", True)
-#     driver = webdriver.Chrome(options=ops)
-#     driver.maximize_window()
-#     driver.implicitly_wait(5)
-#     driver.get("https://rahulshettyacademy.com/angularpractice/")
-#     request.cls.driver = driver  # Assign the driver to the class attribute
-#     yield driver
-#     driver.quit()
