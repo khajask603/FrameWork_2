@@ -15,11 +15,9 @@ class CheckoutPage(BaseClass):
     def __init__(self, driver):
         self.driver = driver
 
-    #-----Acton methods--------------
-
+    #-----Acton methods--------
     def get_Product_Names(self):
         return self.driver.find_elements(By.CSS_SELECTOR,self.productNames)
-
 
     def click_AddButton(self):
         self.driver.find_element(By.XPATH,self.CardFooter).click()
@@ -27,7 +25,10 @@ class CheckoutPage(BaseClass):
     def Click_Chekout_Button(self):
         self.driver.find_element(By.XPATH, self.checkoutButton).click()
 
+
+
     def Click_SecondChekout_Button(self):
         self.driver.find_element(By.CSS_SELECTOR, self.checkoutButton_2).click()
         confirmPage=ConfirmPage(self.driver)
         return confirmPage
+    #Test-----
